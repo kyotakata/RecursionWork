@@ -70,12 +70,12 @@ namespace RecursionWork
         /// <returns></returns>
         private static int CalcGCD(int x, int y)
         {
-            if (x%y == 0)
+            if (x % y == 0)
             {
                 return y;
             }
 
-            return CalcGCD(y, x%y);
+            return CalcGCD(y, x % y);
         }
 
         /// <summary>
@@ -95,5 +95,60 @@ namespace RecursionWork
             }
             return x;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(splitAndAdd(546125));
+        }
+
+        public static decimal splitAndAdd(decimal number)
+        {
+            if (number < 0) throw new ArgumentException("正の数を入力してください。");
+
+            return splitAndAddHelper(number);
+
+        }
+
+        public static decimal splitAndAddHelper(decimal digits)
+        {
+            // 値が10以下になった時がベースケース
+            if (digits < 10) return digits;
+
+            return digits % 10 + splitAndAddHelper(Math.Floor(digits / 10));
+
+        }
+
+        //public static int splitAndAddHelper(int number, int digits, int count, int sum)
+        //{
+        //    if (count <= 0)
+        //    {
+        //        return sum;
+        //    }
+        //    else if(count == 1)
+        //    {
+        //        sum += number;
+        //    }
+        //    else
+        //    {
+        //        var quo = number / (int)Math.Pow(10, count - 1);
+        //        sum += quo;
+        //        number -= quo * (int)Math.Pow(10, count - 1);
+        //    }
+        //    count--;
+        //    return splitAndAddHelper(number, digits, count, sum);
+        //}
+
+        /// <summary>
+        /// 正の数の桁数を取得する(対数(log10))
+        /// 負数や浮動小数点は未対応
+        /// </summary>
+        /// <param name="number">正の数</param>
+        /// <returns>桁数</returns>
+        public static int GetNumberOfDigits(int number)
+        {
+            // Math.Log10(0)はNegativeInfinityを返すため、別途処理する。
+            return (number == 0) ? 1 : ((int)Math.Log10(number) + 1);
+        }
+
     }
 }
