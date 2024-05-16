@@ -150,5 +150,30 @@ namespace RecursionWork
             return (number == 0) ? 1 : ((int)Math.Log10(number) + 1);
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(multipleOfTwoTotal(3));
+        }
+
+        public static int multipleOfTwoTotal(int n)
+        {
+            return multipleOfTwoTotalHelper(3);
+        }
+
+        private static int multipleOfTwoTotalHelper(int n)
+        {
+            if (n < 1) return 0;
+
+            var i = n;
+            var sum = 0;
+
+            while (i > 0)
+            {
+                sum += i * 2;
+                i--;
+            }
+
+            return sum + multipleOfTwoTotalHelper(n - 1);
+        }
     }
 }
