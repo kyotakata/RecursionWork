@@ -175,5 +175,25 @@ namespace RecursionWork
 
             return sum + multipleOfTwoTotalHelper(n - 1);
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(fibonacci(5));
+        }
+
+        private static Dictionary<int, int> Cache = new Dictionary<int, int>();
+
+        private static int fibonacci(int n)
+        {
+            if (n == 0) return 0;
+            if (n == 1) return 1;
+
+            if (Cache.ContainsKey(n)) return Cache[n];
+
+            int result = fibonacci(n - 1) + fibonacci(n - 2);
+            Cache[n] = result;
+            return result;
+        }
+
     }
 }
